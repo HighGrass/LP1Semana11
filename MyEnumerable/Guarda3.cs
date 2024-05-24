@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
-namespace MyGenericClass
+namespace MyEnumerable
 {
-    public class Guarda3<T>
+    public class Guarda3<T> : IEnumerable<T>
     {
         private T[] items = new T[3];
 
@@ -31,6 +33,19 @@ namespace MyGenericClass
             {
                 throw new IndexOutOfRangeException();
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var item in items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
